@@ -5,7 +5,7 @@ import random
 
 
 #Before working on pandas DataFrame we must understand how it works.
-#DataFrame's basis structure is the dictionary {"key" ; value}, we may need to create a dataset from a DataFrame
+#The DataFrame's basic structure is the dictionary {"key" ; value}, we may need to create a dataset from a DataFrame
 # We can do it creating a dictionary and wrapping it on a pandas DataFrame
 # The next two function allow you to do that.
 
@@ -47,6 +47,9 @@ dataset_test .to_csv("dataset_test.csv", sep=';', header=True, float_format='%.6
 # arg1-> Path -> path_file indicates where is placed
 # arg2-> Sep  -> indicates where a new data start and finish in other words how the data is divided.
 # arg3-> header -> refers where the dataset features is placed (horizontally, columns-wise)
+
+#If we already have a dataset stored in CSV format we cat load it as following.
+
 dataset_org = pd.read_csv("dataset_test.csv", sep=";", header=0)
 
 #Pandas allow us to display the result in many formats, in this case 4f->(2.0121)
