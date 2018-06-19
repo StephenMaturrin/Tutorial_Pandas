@@ -12,10 +12,10 @@ import random
 #This function allow you to create a basic dictionary, it has some key (A,B,C,D and testname) and some random values
 def create_dict():
 
-    dictionary = {"A": np.random.randint(1, 10),
-            "B": np.random.randint(1, 10) ,
-            "C": np.random.randint(1, 10)** -np.random.randint(10) ,
-            "D": np.random.randint(1, 10),
+    dictionary = {"A": np.random.randint(1, 100),
+            "B": np.random.randint(1, 100) ,
+            "C": np.random.randint(1, 100)** -np.random.randint(10) ,
+            "D": np.random.randint(1, 100),
             "testname" :  "test."+random.choice(string.ascii_letters)}
 
     return dictionary
@@ -79,13 +79,13 @@ print(dataset.describe())
 # We want to take all the elements whose come from test.d thus wi will apply a filter.
 # Dataset.Feature.str.contains('key')
 # We want to store only the elements that contain the same "key" in our case the letter "d"
-dataset= dataset[dataset.testname.str.contains("test.d") == True]
+# dataset= dataset[dataset.testname.str.contains("test.d") == True]
 
 
 
-dataset= dataset[dataset.A>=0]
+dataset= dataset[dataset.A>=10]
 
-dataset= dataset[dataset.B<=8]
+dataset= dataset[dataset.B>=50]
 
 #Print to check if the filers have worked well
 print(dataset.B.describe())
@@ -103,19 +103,27 @@ df.to_csv("filtered_dataset.csv", sep=';', header=True, float_format='%.4f',inde
 from matplotlib import pyplot as plt
 
 #To show a pretty chart we need to declare some items like title, ylabels, etc.. as described below
-plt.title(' Vdd Vs Column 23')
-plt.ylabel("Column 23")
-plt.xlabel("Vdd ")
+plt.title(' A Vs B')
+plt.ylabel("B")
+plt.xlabel("A ")
 
 # We need to declare 'X' and 'Y', in our case X = Vdd and Y = C23 thus we have to take the relevant elements from the DataFrame
 A = dataset.A
+
 B = dataset.B
 
+print(A.describe())
+
+print(B.describe())
+
+print(min(A),max(A))
+
+print(min(B),max(B))
 # We may need to divide our axis in order to  have a more intuitive view
 # We should create two array that will store the resolution of our axis, from max() to min() and the period (in this case 10)(optional)
-print(A)
-major_ticks = np.arange(min(A), max(A), 1)
-minor_ticks = np.arange(min(B), max(B), 1)
+
+major_ticks = np.arange(min(B), max(B), 1)
+minor_ticks = np.arange(min(A), max(A)+ 30, 1)
 # We must load the arrays in xticks
 plt.xticks(minor_ticks)
 plt.yticks(major_ticks)
@@ -137,8 +145,4 @@ plt.plot(A, B, ('o' + 'r'), linewidth=0.5, label="AB" )
 
 #plot legand
 plt.legend()
-# sowh the picutre
 plt.show()
-
-
-
